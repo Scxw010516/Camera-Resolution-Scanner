@@ -13,7 +13,7 @@
 
     <!-- 分辨率和帧率配置 -->
     <a-card>
-      <template #title>测试配置</template>
+      <template #title><span style="user-select: none">测试配置</span></template>
       <template #extra>
         <a-button type="link" @click="resetToDefault">重置为默认配置</a-button>
       </template>
@@ -22,7 +22,7 @@
         <!-- 分辨率配置 -->
         <div>
           <div class="section-header">
-            <h3 class="section-title">分辨率</h3>
+            <h3 class="section-title" style="user-select: none">分辨率</h3>
             <a-button type="primary" @click="showAddResolutionModal = true">
               <template #icon><plus-outlined /></template>
               添加分辨率
@@ -52,7 +52,7 @@
         <!-- 帧率配置 -->
         <div>
           <div class="section-header">
-            <h3 class="section-title">帧率</h3>
+            <h3 class="section-title" style="user-select: none">帧率</h3>
             <a-button type="primary" @click="showAddFrameRateModal = true">
               <template #icon><plus-outlined /></template>
               添加帧率
@@ -180,20 +180,29 @@ import { message } from "ant-design-vue";
 
 // 预设配置
 const defaultResolutions = [
+  // 按分辨率从低到高排序
   { width: 160, height: 120, label: "QQVGA" },
+  { width: 240, height: 180, label: "HQVGA" },
   { width: 320, height: 240, label: "QVGA" },
+  { width: 480, height: 360, label: "HVGA" },
   { width: 640, height: 480, label: "VGA" },
   { width: 800, height: 600, label: "SVGA" },
+  { width: 960, height: 720, label: "HD+" },
   { width: 1024, height: 768, label: "XGA" },
+  { width: 1152, height: 864, label: "XGA+" },
+  { width: 1280, height: 720, label: "HD" },
   { width: 1280, height: 960, label: "SXGA-" },
   { width: 1400, height: 1050, label: "SXGA+" },
   { width: 1600, height: 1200, label: "UXGA" },
-  { width: 2048, height: 1536, label: "QXGA" },
-  { width: 1280, height: 720, label: "HD" },
   { width: 1920, height: 1080, label: "Full HD" },
+  { width: 2048, height: 1536, label: "QXGA" },
   { width: 2560, height: 1440, label: "QHD" },
+  { width: 2560, height: 1920, label: "WQXGA" },
+  { width: 3200, height: 2400, label: "QUXGA" },
   { width: 3840, height: 2160, label: "4K UHD" },
   { width: 4000, height: 3000, label: "12MP" },
+  { width: 4096, height: 3072, label: "HXGA" },
+  { width: 6400, height: 4800, label: "HUXGA" },
   { width: 8000, height: 6000, label: "48MP" },
 ];
 
@@ -943,6 +952,7 @@ onUnmounted(() => {
   justify-content: center;
   margin-right: 8px;
   font-size: 14px;
+  user-select: none; /* 添加这行 */
 }
 
 .resolution-tag {
@@ -971,6 +981,13 @@ onUnmounted(() => {
   font-size: 0.9em;
   font-weight: 500;
   white-space: nowrap;
+}
+
+.resolution-tag .resolution,
+.resolution-tag .megapixels,
+.resolution-tag .standard,
+.framerate-tag {
+  user-select: none;
 }
 
 .framerate-tag {
